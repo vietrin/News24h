@@ -2,6 +2,7 @@ package com.springmvc.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class CommentDao implements ICommentDao {
 		return jdbcTemplate.query("select * from comment where id_news = " + id_news + "  order by id Desc",
 				new RowMapper<Comment>() {
 					public Comment mapRow(ResultSet resultSet, int row) throws SQLException {
-						Comment comment = new Comment(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3),
-								resultSet.getString(4), resultSet.getString(5));
+						Comment comment = new Comment(resultSet.getInt(1), resultSet.getInt(2), resultSet.getString(3),
+								resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
 						return comment;
 					}
 				});
@@ -46,9 +47,18 @@ public class CommentDao implements ICommentDao {
 	@Override
 	public int create(Comment comment) {
 		// TODO Auto-generated method stub
-		String sql = "insert into comment (id_account, id_ news, comment,date_create) values (?,?,?,?)";
-		return jdbcTemplate.update(sql, comment.getId_account(), comment.getId_news(), comment.getCommnet(),
-				comment.getDate_create());
+		String sql = "insert into comment ( id_news ,email,username, comment,date_cmt) values (?,?,?,?)";
+		return jdbcTemplate.update(sql, comment.getId_news() ,comment.getEmail(),comment.getUsername(), comment.getComment(),
+				LocalDateTime.now().toString());
+	}
+	/*
+	 *  Đếm bình luận của bài viết
+	 */
+	@Override
+	public int countComment(int id) {
+		// TODO Auto-generated method stub
+		String sql ="select count(*) from comment where id_news ="+id+"";
+		return jdbcTemplate.queryForObject(sql,Integer.class);
 	}
 
 }

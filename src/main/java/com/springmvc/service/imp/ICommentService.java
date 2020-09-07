@@ -1,4 +1,4 @@
-package com.springmvc.dao.imp;
+package com.springmvc.service.imp;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import com.springmvc.model.Comment;
  * @author rinnv
  *
  */
-public interface ICommentDao {
+public interface ICommentService {
 	public List<Comment> getAll(int id);
 	public int create(Comment comment);
-	public int countComment(int id);
+	public int countComment(int id) ;
 }

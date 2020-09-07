@@ -2,7 +2,9 @@ package com.springmvc.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +48,10 @@ public class NewsDao implements INewsDao {
 	 */
 	@Override
 	public int insert(News news) {
-		String sql = "insert into news (id_category,title,desrc,url_thumb,keyword,body,[image],read_count,date_update,date_create,person_create) values (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into news (id_category,title,descr,url_thumb,keyword,body,[image],read_count,date_create,person_create) values (?,?,?,?,?,?,?,?,?,?)";
 		return jdbcTemplate.update(sql, news.getId_category(), news.getTitlte(), news.getDescr(), news.getUrl_thumb(),
-				news.getKeyword(), news.getBody(), news.getImage(), news.getRead_count(), news.getDate_update(),
-				LocalDateTime.now().toString(), news.getPerson_create());
+				news.getKeyword(), news.getBody(), news.getImage(), news.getRead_count(),
+				getDateTime(), news.getPerson_create());
 	}
 
 	/*
@@ -57,10 +59,10 @@ public class NewsDao implements INewsDao {
 	 */
 	@Override
 	public int update(News news) {
-		String sql = "update news set id_category=?,title=?,desrc=?,url_thumb=?,keyword=?,body=?,image=?,read_count=?,date_update=?,person_create=? where id =? ";
+		String sql = "update news set id_category=?,title=?,descr=?,url_thumb=?,keyword=?,body=?,image=?,read_count=?,date_update=?,person_create=? where id =? ";
 		return jdbcTemplate.update(sql, news.getId_category(), news.getTitlte(), news.getDescr(), news.getUrl_thumb(),
 				news.getKeyword(), news.getBody(), news.getImage(), news.getRead_count(),
-				LocalDateTime.now().toString(), news.getPerson_create(), news.getId());
+				getDateTime(), news.getPerson_create(), news.getId());
 	}
 
 	/*
@@ -124,10 +126,10 @@ public class NewsDao implements INewsDao {
 		});
 	}
 
-//	public String getDateTime() {
-//	 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-//	    Date date = new Date();
-//	return formatter.format(date);
-//}
+	public String getDateTime() {
+	 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+	    Date date = new Date();
+	return formatter.format(date);
+}
 
 }

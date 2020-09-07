@@ -1,8 +1,8 @@
 package com.springmvc.model;
 
 public class Comment {
-	private int id, id_news, id_account;
-	private String commnet, date_create;
+	private int id, id_news;
+	private String username, email ,comment, date_create;
 
 	public Comment() {
 		// TODO Auto-generated constructor stub
@@ -24,22 +24,6 @@ public class Comment {
 		this.id_news = id_news;
 	}
 
-	public int getId_account() {
-		return id_account;
-	}
-
-	public void setId_account(int id_account) {
-		this.id_account = id_account;
-	}
-
-	public String getCommnet() {
-		return commnet;
-	}
-
-	public void setCommnet(String commnet) {
-		this.commnet = commnet;
-	}
-
 	public String getDate_create() {
 		return date_create;
 	}
@@ -48,13 +32,39 @@ public class Comment {
 		this.date_create = date_create;
 	}
 
-	public Comment(int id, int id_news, int id_account, String commnet, String date_create) {
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Comment(int id, int id_news, String email,String username,  String comment, String date_create) {
 		super();
 		this.id = id;
 		this.id_news = id_news;
-		this.id_account = id_account;
-		this.commnet = commnet;
+		this.username = username;
+		this.email = email;
+		this.comment = comment;
 		this.date_create = date_create;
 	}
 
+	
 }
